@@ -1,0 +1,13 @@
+name: "Discord Notifications"
+
+description: "cria uma notificação no discord"
+
+author: João pedro
+
+outputs:
+  event-output:
+    description: The resulting of access the env GITHUB_EVENT_NAME
+
+runs:
+  using: "node18"
+  main: "main.js"
