@@ -1,7 +1,5 @@
 name: "Discord Notifications"
-
 description: "cria uma notificação no discord"
-
 author: João pedro
 
 outputs:
@@ -10,4 +8,4 @@ outputs:
 
 runs:
   using: "node18"
-  main: "main.js"
+  script: "main.js"
