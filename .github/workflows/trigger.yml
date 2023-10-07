@@ -26,4 +26,4 @@ jobs:
         run: npm install
 
       - name: ha-ha
-        uses: ./.github/actions/
+        uses: ./.github/actions/action.yml
