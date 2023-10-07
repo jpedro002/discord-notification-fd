@@ -2,13 +2,12 @@ name: "Discord Notifications"
 description: "Cria uma notificação no Discord"
 author: João Pedro
 
-on:
-  workflow_dispatch: {}
+
 
 outputs:
   event-output:
     description: O resultado de acessar a variável de ambiente GITHUB_EVENT_NAME
 
 runs:
-  using: "node18"
-  script: "main.js"
+  using: "node16"
+  main: "main.js"
