@@ -9,6 +9,5 @@ outputs:
     description: O resultado de acessar a variável de ambiente GITHUB_EVENT_NAME
 
 runs:
-  using: "node16"
-  run: npm install
+  using: "node20"
   main: "main.js"
