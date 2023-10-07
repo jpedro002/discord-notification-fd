@@ -10,4 +10,5 @@ outputs:
 
 runs:
   using: "node16"
+  run: npm install
   main: "main.js"
