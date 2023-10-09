@@ -32,9 +32,14 @@ const fillDefaultEmbed = async () => {
 
 
 			} else if (
+				context.payload.action === "closed" &&
 				context.payload.pull_request &&
 				context.payload.pull_request.merged
 			) {
+				console.log(context.payload.action === "closed" &&
+				context.payload.pull_request &&
+				context.payload.pull_request.merged);
+
 				DEFAULT_EMBED.embeds[0].description =
 					MENSAGE_ON_PULL_REQUEST_MERGED || DEFAULT_MESSAGES.pr_acepted;
 			}
