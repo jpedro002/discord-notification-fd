@@ -20,7 +20,7 @@ const sendDiscordMessage = async (DISCORD_WEBHOOK,DISCORD_PERSONALIZED_EMBED) =>
 			const data = await fillDefaultEmbed();
 			console.log(JSON.stringify(data, null, 2));
 			console.log(DISCORD_WEBHOOK);
-			await postMessage(DISCORD_WEBHOOK,JSON.stringify(data));
+			await postMessage(DISCORD_WEBHOOK,JSON.data);
 		} catch (error) {
 			console.error("Error:", error);
 		}
