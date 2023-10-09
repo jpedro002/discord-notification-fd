@@ -4,7 +4,6 @@ const fillDefaultEmbed = require("./fillEmbed.js")
 
 
 
-
 const sendDiscordMessage = async (DISCORD_WEBHOOK,DISCORD_PERSONALIZED_EMBED) => {
 	
 	if (!DISCORD_WEBHOOK) {
