@@ -15,7 +15,8 @@ const {
 const fillDefaultEmbed = async () => {
 	const githubActor = GITHUB_ACTOR;
 	const avatarUrl = await getAuthorAvatar(githubActor);
-	const color = Math.floor(Math.random() * 10000000) + 1;
+	const color = Math.floor(Math.random() * 16777215) + 1; // Alterado para gerar uma cor hexadecimal aleatória
+
 	DEFAULT_EMBED.embeds[0].color = color;
 	DEFAULT_EMBED.embeds[0].author.name = githubActor;
 	DEFAULT_EMBED.embeds[0].author.icon_url = avatarUrl;
@@ -27,15 +28,22 @@ const fillDefaultEmbed = async () => {
 			if (context.payload.action === "opened") {
 				DEFAULT_EMBED.embeds[0].description =
 					MENSAGE_ON_PULL_REQUEST_OPENED || DEFAULT_MESSAGES.pr_opened;
+			} else if (
+				context.payload.action === "closed" &&
+				context.payload.pull_request.merged
+			) {
+				DEFAULT_EMBED.embeds[0].description =
+					MENSAGE_ON_PULL_REQUEST_MERGED || DEFAULT_MESSAGES.pr_acepted;
+				DEFAULT_EMBED.embeds[0].footer.text = `O pull request foi mesclado.`;
 			} else {
+				console.log("Pull Request event not supported");
 				process.exit(1);
-				console.log('Pull Request event not supported');
 			}
 			break;
 		case "issues":
 			DEFAULT_EMBED.embeds[0].description =
 				MENSAGE_ON_ISSUE_OPENED || DEFAULT_MESSAGES.issue;
-			DEFAULT_EMBED.embeds[0].footer.text = `Conteudo da issue ${context.payload.issue.body}`;
+			DEFAULT_EMBED.embeds[0].footer.text = `Conteúdo da issue: ${context.payload.issue.body}`;
 			break;
 		case "push":
 			const mensagemDoCommitMaisRecente =
@@ -43,15 +51,15 @@ const fillDefaultEmbed = async () => {
 
 			if (mensagemDoCommitMaisRecente.includes("Merge pull request")) {
 				DEFAULT_EMBED.embeds[0].description =
-					MENSAGE_ON_PULL_REQUEST_MERGED || DEFAULT_MESSAGES.pr_acepted;
+					MENSAGE_ON_PULL_REQUEST_MERGED || DEFAULT_MESSAGES.push;
+				DEFAULT_EMBED.embeds[0].footer.text = `O commit que disparou a mensagem: ${mensagemDoCommitMaisRecente}`;
 			} else {
+				DEFAULT_EMBED.embeds[0].description =
+					MENSAGE_ON_PUSH || DEFAULT_MESSAGES.push;
+				DEFAULT_EMBED.embeds[0].footer.text = `O commit que disparou a mensagem: ${
+					context.payload.commits[context.payload.commits.length - 1].message
+				}`;
 			}
-			DEFAULT_EMBED.embeds[0].description =
-				MENSAGE_ON_PUSH || DEFAULT_MESSAGES.push;
-			DEFAULT_EMBED.embeds[0].footer.text = `O commit que disparou a mensagem: ${
-				context.payload.commits[context.payload.commits.length - 1].message
-			}`;
-
 			break;
 		default:
 			console.error("Event not supported");
