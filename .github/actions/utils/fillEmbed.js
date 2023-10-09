@@ -50,7 +50,7 @@ const fillDefaultEmbed = async () => {
 			const mensagemDoCommitMaisRecente =
 				context.payload.commits[context.payload.commits.length - 1].message;
 
-			if (mensagemDoCommitMaisRecente.toLocaleLowerCase().includes(identifyMenssage.toLocaleLowerCase)) {
+			if (mensagemDoCommitMaisRecente.toLocaleLowerCase().includes(identifyMenssage.toLocaleLowerCase())) {
 				DEFAULT_EMBED.embeds[0].description =
 					MENSAGE_ON_PULL_REQUEST_MERGED || DEFAULT_MESSAGES.push;
 				DEFAULT_EMBED.embeds[0].footer.text = `O commit que disparou a mensagem: ${mensagemDoCommitMaisRecente}`;
