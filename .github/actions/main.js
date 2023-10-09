@@ -1,10 +1,12 @@
-const core = require("@actions/core");
+const sendDiscordMessage = require("./utils/sendDiscordMessage");
 
-async function run() {
-  const eventName = process.env.GITHUB_EVENT_NAME
-  core.setOutput("event-output", eventName);
-  console.log(eventName);
+const {
+	DISCORD_WEBHOOK,
+	DISCORD_PERSONALIZED_EMBED,
+} = process.env;
 
-}
-
-run();
+sendDiscordMessage(DISCORD_WEBHOOK, DISCORD_PERSONALIZED_EMBED).catch(
+	(error) => {
+		console.error("Error sending Discord message:", error);
+	}
+);

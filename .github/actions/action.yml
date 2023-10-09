@@ -6,7 +6,7 @@ author: João Pedro
 
 outputs:
   event-output:
-    description: O resultado de acessar a variável de ambiente GITHUB_EVENT_NAME
+    description: Logar erro
 
 runs:
   using: "node20"
