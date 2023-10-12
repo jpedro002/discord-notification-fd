@@ -12,8 +12,8 @@ const sendDiscordMessage = async (DISCORD_WEBHOOK,DISCORD_PERSONALIZED_EMBED) =>
 	} else if (
 		DISCORD_PERSONALIZED_EMBED
 	) {
-
-		console.log(JSON.stringify('log aqui',DISCORD_PERSONALIZED_EMBED[0], null, 2));
+		const embed = JSON.parse(DISCORD_PERSONALIZED_EMBED);
+		console.log('log aqui',embed);
 		postMessage(DISCORD_WEBHOOK, JSON.stringify(DISCORD_PERSONALIZED_EMBED[0]));
 	} else {
 		try {
