@@ -65,13 +65,13 @@ const fillDefaultEmbed = async () => {
       if (mensagemDoCommitMaisRecente.toLowerCase().includes(identifyMessage.toLowerCase())) {
         console.log("é igual uhuulll");
         embed.embeds[0].description =
-          MENSAGE_ON_PULL_REQUEST_MERGED || DEFAULT_MESSAGES.push;
-        embed.embeds[0].footer.text = `O PR commit que disparou a mensagem: ${mensagemDoCommitMaisRecente}`;
+          MENSAGE_ON_PULL_REQUEST_MERGED || DEFAULT_MESSAGES.pr_acepted;
+        embed.embeds[0].footer.text = `O commit que disparou a mensagem: ${mensagemDoCommitMaisRecente}`;
       } else {
         console.log("não é igual");
         embed.embeds[0].description =
-          MENSAGE_ON_PUSH || DEFAULT_MESSAGES.pr_acepted;
-        embed.embeds[0].footer.text = `O PUSH commit que disparou a mensagem: ${
+          MENSAGE_ON_PUSH || DEFAULT_MESSAGES.push;
+        embed.embeds[0].footer.text = `O commit que disparou a mensagem: ${
           context.payload.commits[context.payload.commits.length - 1].message
         }`;
       }
