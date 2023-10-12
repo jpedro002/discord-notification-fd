@@ -13,7 +13,7 @@ const sendDiscordMessage = async (DISCORD_WEBHOOK,DISCORD_PERSONALIZED_EMBED) =>
 		DISCORD_PERSONALIZED_EMBED &&
 		typeof DISCORD_PERSONALIZED_EMBED === "object"
 	) {
-		console.log(JSON.stringify(DISCORD_PERSONALIZED_EMBED));
+		console.log(JSON.stringify(DISCORD_PERSONALIZED_EMBED, null, 2));
 		postMessage(DISCORD_WEBHOOK, DISCORD_PERSONALIZED_EMBED);
 	} else {
 		try {
