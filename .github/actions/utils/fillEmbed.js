@@ -55,6 +55,7 @@ const fillDefaultEmbed = async () => {
 				.toLocaleLowerCase()
 				.split(" ");
 				core.debug(mensagemDoCommitMaisRecente)
+				core.setOutput('event-output', mensagemDoCommitMaisRecente)
 			if (mensageToArr[0] === "merge") {
 				core.debug('Inside push merge event')
 				DEFAULT_EMBED.embeds[0].description =
