@@ -14,7 +14,7 @@ const sendDiscordMessage = async (DISCORD_WEBHOOK,DISCORD_PERSONALIZED_EMBED) =>
 	) {
 		const parseEmbed = JSON.parse(DISCORD_PERSONALIZED_EMBED)
 		const embedToSend = JSON.stringify(parseEmbed[0])
-		console.log(embedToSend);
+		console.log(embedToSend,"embedToSend");
 		postMessage(DISCORD_WEBHOOK, embedToSend);
 	} else {
 		try {
