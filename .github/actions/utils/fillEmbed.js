@@ -1,7 +1,6 @@
 const { getAuthorAvatar } = require("./api.js");
 const { DEFAULT_EMBED, DEFAULT_MESSAGES } = require("./data-embeds.js");
 const github = require("@actions/github");
-const core = require("@actions/core");
 
 const context = github.context;
 
@@ -40,7 +39,7 @@ const fillDefaultEmbed = async () => {
 				embed.embeds[0].description =
 					MENSAGE_ON_PULL_REQUEST_OPENED || DEFAULT_MESSAGES.pr_opened;
 			} else {
-				console.log("Pull Request event not supported");
+				console.error("Pull Request event not supported");
 				process.exit(1);
 			}
 			break;
@@ -63,7 +62,6 @@ const fillDefaultEmbed = async () => {
 				embed.embeds[0].description =
 					MENSAGE_ON_PULL_REQUEST_MERGED || DEFAULT_MESSAGES.pr_acepted;
 			} else {
-				console.log("não é igual");
 				embed.embeds[0].description = MENSAGE_ON_PUSH || DEFAULT_MESSAGES.push;
 				embed.embeds[0].footer.text = `O commit que disparou a mensagem: ${
 					context.payload.commits[context.payload.commits.length - 1].message
