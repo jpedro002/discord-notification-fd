@@ -10,11 +10,10 @@ const sendDiscordMessage = async (DISCORD_WEBHOOK,DISCORD_PERSONALIZED_EMBED) =>
 		console.error("DISCORD_WEBHOOK is not defined");
 		process.exit(1);
 	} else if (
-		DISCORD_PERSONALIZED_EMBED &&
-		typeof DISCORD_PERSONALIZED_EMBED === "object"
+		DISCORD_PERSONALIZED_EMBED
 	) {
-		console.log(JSON.stringify(DISCORD_PERSONALIZED_EMBED, null, 2));
-		postMessage(DISCORD_WEBHOOK, DISCORD_PERSONALIZED_EMBED);
+		console.log(JSON.stringify(DISCORD_PERSONALIZED_EMBED[0], null, 2));
+		postMessage(DISCORD_WEBHOOK, DISCORD_PERSONALIZED_EMBED[0]);
 	} else {
 		try {
 			const data = await fillDefaultEmbed();
