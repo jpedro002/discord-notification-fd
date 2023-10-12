@@ -40,14 +40,7 @@ const fillDefaultEmbed = async () => {
       if (context.payload.action === "opened") {
         embed.embeds[0].description =
           MENSAGE_ON_PULL_REQUEST_OPENED || DEFAULT_MESSAGES.pr_opened;
-      } else if (
-        context.payload.action === "closed" &&
-        context.payload.pull_request.merged
-      ) {
-        embed.embeds[0].description =
-          MENSAGE_ON_PULL_REQUEST_MERGED || DEFAULT_MESSAGES.pr_acepted;
-        embed.embeds[0].footer.text = "O pull request foi mesclado.";
-      } else {
+      }else {
         console.log("Pull Request event not supported");
         process.exit(1);
       }
@@ -63,24 +56,26 @@ const fillDefaultEmbed = async () => {
       const identifyMessage = "Merge pull request";
 
       if (mensagemDoCommitMaisRecente.toLowerCase().includes(identifyMessage.toLowerCase())) {
-        console.log("é igual uhuulll");
+				console.log("é igual uhuulll");
         embed.embeds[0].description =
-          MENSAGE_ON_PULL_REQUEST_MERGED || DEFAULT_MESSAGES.pr_acepted;
-        embed.embeds[0].footer.text = `O commit que disparou a mensagem: ${mensagemDoCommitMaisRecente}`;
+				MENSAGE_ON_PULL_REQUEST_MERGED || DEFAULT_MESSAGES.pr_acepted;
+				
       } else {
-        console.log("não é igual");
+				console.log("não é igual");
         embed.embeds[0].description =
-          MENSAGE_ON_PUSH || DEFAULT_MESSAGES.push;
+				MENSAGE_ON_PUSH || DEFAULT_MESSAGES.push;
         embed.embeds[0].footer.text = `O commit que disparou a mensagem: ${
-          context.payload.commits[context.payload.commits.length - 1].message
+					context.payload.commits[context.payload.commits.length - 1].message
         }`;
       }
       break;
-    default:
-      console.error("Event not supported");
-      process.exit(1);
-  }
-  return embed;
-};
-
-module.exports = fillDefaultEmbed;
+			default:
+				console.error("Event not supported");
+				process.exit(1);
+			}
+			core.exportVariable("debug-output", console.log(JSON.stringify(embed,null,2)));
+			return embed;
+		};
+		
+		module.exports = fillDefaultEmbed;
+		
