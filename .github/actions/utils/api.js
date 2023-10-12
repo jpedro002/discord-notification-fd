@@ -21,6 +21,7 @@ const getAuthorAvatar = async (username) => {
 
 const postMessage = async (webhook, message) => {
 	try {
+		console.log(message,"oioioioio");
 		const response = await axios.post(webhook, message);
 		if (response.status === 204) {
 			console.log("Embed enviada com sucesso!");
