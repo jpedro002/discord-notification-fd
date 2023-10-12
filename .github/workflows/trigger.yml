@@ -21,7 +21,7 @@ jobs:
       - name: Create notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.MY_DISCORD_WEBHOOK }}
-        uses: action.yml
+        uses: ./
 
       - name: Get the output time
         run: echo "$debug-output"
