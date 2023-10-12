@@ -51,7 +51,8 @@ const fillDefaultEmbed = async () => {
 
 		case "push":
 		const mensagemDoCommitMaisRecente = context.payload.commits[context.payload.commits.length - 1].message;
-			
+		const identifyMessage = "Merge pull request"
+
 		if (mensagemDoCommitMaisRecente.toLowerCase().includes(identifyMessage.toLowerCase())) {
 			console.log("é igual uhuulll");
 					DEFAULT_EMBED.embeds[0].description =
