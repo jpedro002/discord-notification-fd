@@ -50,26 +50,25 @@ const fillDefaultEmbed = async () => {
 			break;
 
 		case "push":
-			core.setCommandEcho('oiii')
-			const mensagemDoCommitMaisRecente = context.payload.commits[context.payload.commits.length - 1].message;
-				core.debug('Inside push event')
-			const mensageToArr = mensagemDoCommitMaisRecente
-				.toLocaleLowerCase()
-				.split(" ");
-				core.debug(mensagemDoCommitMaisRecente)
-				core.exportVariable('debug-output', mensagemDoCommitMaisRecente)
-			if (mensageToArr[0] === "merge") {
-				core.debug('Inside push merge event')
-				DEFAULT_EMBED.embeds[0].description =
+		const mensagemDoCommitMaisRecente = context.payload.commits[context.payload.commits.length - 1].message;
+			
+		if (mensagemDoCommitMaisRecente.toLowerCase().includes(identifyMessage.toLowerCase())) {
+			console.log("é igual uhuulll");
+					DEFAULT_EMBED.embeds[0].description =
 					MENSAGE_ON_PULL_REQUEST_MERGED || DEFAULT_MESSAGES.pr_acepted;
 				DEFAULT_EMBED.embeds[0].footer.text = `O commit que disparou a mensagem: ${mensagemDoCommitMaisRecente}`;
-			} else {
-				DEFAULT_EMBED.embeds[0].description =
-					MENSAGE_ON_PUSH || DEFAULT_MESSAGES.push;
-				DEFAULT_EMBED.embeds[0].footer.text = `O commit que disparou a mensagem: ${
-					context.payload.commits[context.payload.commits.length - 1].message
-				}`;
-			}
+
+
+
+		} else {
+			console.log("não é igual");
+			DEFAULT_EMBED.embeds[0].description =
+			MENSAGE_ON_PUSH || DEFAULT_MESSAGES.push;
+		DEFAULT_EMBED.embeds[0].footer.text = `O commit que disparou a mensagem: ${
+			context.payload.commits[context.payload.commits.length - 1].message
+		}`
+		}
+
 			break;
 		default:
 			console.error("Event not supported");
