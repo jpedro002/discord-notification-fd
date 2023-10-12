@@ -14,12 +14,14 @@ jobs:
 
       - name: Create Discord embed
         id: create_embed
-        run: node ./.github/actions/create-discord-embed.js
+        run: |
+          node_exec=$(node create-discord-embed.js)
+          echo "embed=$node_exec" >> $GITHUB_ENV
 
       - name: Discord notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.MY_DISCORD_WEBHOOK }}
-          DISCORD_PERSONALIZED_EMBED: ${{ steps.create_embed.outputs.value}}
+          DISCORD_PERSONALIZED_EMBED: ${{ env.embed }}
         uses: ./
 
       
