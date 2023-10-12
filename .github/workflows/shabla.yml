@@ -28,7 +28,7 @@ jobs:
         env:
           DISCORD_WEBHOOK: ${{ secrets.MY_DISCORD_WEBHOOK }}
           DISCORD_PERSONALIZED_EMBED: ${{ steps.create_embed.outputs.value}}
-        uses: action.yml
+        uses: ./
 
       
         
