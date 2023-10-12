@@ -40,6 +40,7 @@ const fillDefaultEmbed = async () => {
       if (context.payload.action === "opened") {
         embed.embeds[0].description =
           MENSAGE_ON_PULL_REQUEST_OPENED || DEFAULT_MESSAGES.pr_opened;
+					console.log(JSON.stringify(embed,null,2))
       }else {
         console.log("Pull Request event not supported");
         process.exit(1);
@@ -49,6 +50,7 @@ const fillDefaultEmbed = async () => {
       embed.embeds[0].description =
         MENSAGE_ON_ISSUE_OPENED || DEFAULT_MESSAGES.issue;
       embed.embeds[0].footer.text = `Conteúdo da issue: ${context.payload.issue.body}`;
+			console.log(JSON.stringify(embed,null,2))
       break;
     case "push":
       const mensagemDoCommitMaisRecente =
@@ -59,6 +61,7 @@ const fillDefaultEmbed = async () => {
 				console.log("é igual uhuulll");
         embed.embeds[0].description =
 				MENSAGE_ON_PULL_REQUEST_MERGED || DEFAULT_MESSAGES.pr_acepted;
+				console.log(JSON.stringify(embed,null,2))
 				
       } else {
 				console.log("não é igual");
@@ -67,13 +70,14 @@ const fillDefaultEmbed = async () => {
         embed.embeds[0].footer.text = `O commit que disparou a mensagem: ${
 					context.payload.commits[context.payload.commits.length - 1].message
         }`;
+				console.log(JSON.stringify(embed,null,2))
       }
       break;
 			default:
 				console.error("Event not supported");
 				process.exit(1);
 			}
-			core.exportVariable("debug-output", console.log(JSON.stringify(embed,null,2)));
+			
 			return embed;
 		};
 		
