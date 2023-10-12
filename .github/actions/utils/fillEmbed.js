@@ -17,7 +17,7 @@ const {
 const fillDefaultEmbed = async () => {
 	const githubActor = GITHUB_ACTOR;
 	const avatarUrl = await getAuthorAvatar(githubActor);
-	const color = Math.floor(Math.random() * 16777215) + 1; // Alterado para gerar uma cor hexadecimal aleatória
+	const color = Math.floor(Math.random() * 16777215) + 1; 
 
 	DEFAULT_EMBED.embeds[0].color = color;
 	DEFAULT_EMBED.embeds[0].author.name = githubActor;
@@ -43,13 +43,15 @@ const fillDefaultEmbed = async () => {
 			}
 			break;
 		case "issues":
+
 			DEFAULT_EMBED.embeds[0].description =
 				MENSAGE_ON_ISSUE_OPENED || DEFAULT_MESSAGES.issue;
 			DEFAULT_EMBED.embeds[0].footer.text = `Conteúdo da issue: ${context.payload.issue.body}`;
 			break;
+
 		case "push":
-			const mensagemDoCommitMaisRecente =
-				context.payload.commits[context.payload.commits.length - 1].message;
+			core.setCommandEcho('oiii')
+			const mensagemDoCommitMaisRecente = context.payload.commits[context.payload.commits.length - 1].message;
 				core.debug('Inside push event')
 			const mensageToArr = mensagemDoCommitMaisRecente
 				.toLocaleLowerCase()
