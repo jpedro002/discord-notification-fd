@@ -1,12 +1,9 @@
 name: "Discord Notifications"
 description: "Cria uma notificação no Discord"
 author: João Pedro
-
-
-
-outputs:
-  event-output:
-    description: Logar erro
+branding:
+  icon: message-square
+  color: blue  
 
 runs:
   using: "node20"
