@@ -14,7 +14,7 @@ jobs:
 
       - name: Create Discord embed
         id: create_embed
-        run: node create-discord-embed.js
+        run: node ./.github/actions/create-discord-embed.js
 
       - name: Discord notification
         env:
