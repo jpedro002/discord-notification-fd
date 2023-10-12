@@ -1,4 +1,3 @@
-const Discord = require("discord.js");
 const axios = require("axios");
 
 // Função para obter a foto de perfil do autor do pull request
@@ -28,7 +27,7 @@ async function createEmbed() {
         },
         description:
           "acabou de ter um pull request aceito! Parabéns! Continue assim.",
-        color: 0,
+        color: 5449785,
       },
     ],
   };
@@ -36,10 +35,6 @@ async function createEmbed() {
   try {
     const avatarUrl = await getAuthorAvatar(githubActor); // Obtém a URL da foto de perfil do autor
 
-    const embed = new Discord.EmbedBuilder().setColor("Random");
-    const color = embed.data.color;
-
-    data.embeds[0].color = color;
     data.embeds[0].author.name = githubActor;
     data.embeds[0].author.url = avatarUrl;
 
