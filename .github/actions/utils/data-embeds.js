@@ -12,7 +12,7 @@ const DEFAULT_EMBED = {
          },
 				
          "color":"14177041",
-         "description":"*Hi!* **Wow!** I can __use__ hyperlinks [here](https://discord.com).",
+         "description":"acabou de ter um pull request aceito! Parabéns! Continue assim.",
          "title":"sdfuhskduyfhaskdifuhasdiuf",
          "url":"https://google.com/"
       }
