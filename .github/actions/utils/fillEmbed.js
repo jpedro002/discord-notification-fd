@@ -46,7 +46,7 @@ const fillDefaultEmbed = async () => {
 		case "issues":
 			embed.embeds[0].description =
 				MENSAGE_ON_ISSUE_OPENED || DEFAULT_MESSAGES.issue;
-			embed.embeds[0].footer.text = `Conteúdo da issue: ${context.payload.issue.body}`
+			embed.embeds[0].footer.text = `issue content: ${context.payload.issue.body}`
 			break;
 		case "push":
 			const mensagemDoCommitMaisRecente =

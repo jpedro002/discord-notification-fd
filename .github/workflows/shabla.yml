@@ -21,7 +21,10 @@ jobs:
       - name: Discord notification
         env:
           DISCORD_WEBHOOK: ${{ secrets.MY_DISCORD_WEBHOOK }}
-          DISCORD_PERSONALIZED_EMBED: ${{ env.embed }}
+          MENSAGE_ON_PUSH: 'Push lorem ipsum dor sit amet'
+          MENSAGE_ON_PULL_REQUEST_OPENED: ' Pull request lorem ipsum dor sit amet'
+          MENSAGE_ON_PULL_REQUEST_MERGED: ' Pull request merged lorem ipsum dor sit amet'
+
         uses: ./
 
       
