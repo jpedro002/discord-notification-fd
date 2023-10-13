@@ -24,7 +24,7 @@ async function createEmbed() {
 				{
 					author: {
 						name: githubActor,
-						url: "",
+						icon_url: "",
 					},
 					description:
 						"acabou de ter um pull request aceito! Parabéns! Continue assim.",
@@ -37,7 +37,7 @@ async function createEmbed() {
 		const avatarUrl = await getAuthorAvatar(githubActor); // Obtém a URL da foto de perfil do autor
 
 		//data[0].embeds[0].author.name = githubActor;
-		data[0].embeds[0].author.url = avatarUrl;
+		data[0].embeds[0].author.icon_url = avatarUrl;
 
 		return data;
 	} catch (error) {
