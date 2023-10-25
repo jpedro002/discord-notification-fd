@@ -23,7 +23,7 @@ const postMessage = async (webhook, message) => {
 	const stringifiedMessage = JSON.stringify(message);
 
 	try {
-		console.log(stringifiedMessage, "oioioioio");
+		console.log(stringifiedMessage, "mensagem enviada");
 		const response = await axios.post(webhook, message);
 		if (response.status === 204) {
 			console.log("Embed enviada com sucesso!");
