@@ -35,12 +35,13 @@ const fillDefaultEmbed = async () => {
 
 	switch (context.eventName) {
 		case "pull_request":
-			if (context.payload.action === "opened") {
+			
+			if (context.payload.pull_request && context.payload.pull_request.merged) {
+				embed.embeds[0].description =
+					MENSAGE_ON_PULL_REQUEST_MERGED || DEFAULT_MESSAGES.pr_acepted;
+			} else {
 				embed.embeds[0].description =
 					MENSAGE_ON_PULL_REQUEST_OPENED || DEFAULT_MESSAGES.pr_opened;
-			} else {
-				console.error("Pull Request event not supported");
-				process.exit(1);
 			}
 			break;
 		case "issues":
@@ -49,24 +50,12 @@ const fillDefaultEmbed = async () => {
 			embed.embeds[0].footer.text = `issue content: ${context.payload.issue.body}`
 			break;
 		case "push":
-			const mensagemDoCommitMaisRecente =
-				context.payload.commits[context.payload.commits.length - 1].message;
-			const identifyMessage = "Merge pull request";
 
-			if (
-				mensagemDoCommitMaisRecente
-					.toLowerCase()
-					.includes(identifyMessage.toLowerCase())
-			) {
-				
-				embed.embeds[0].description =
-					MENSAGE_ON_PULL_REQUEST_MERGED || DEFAULT_MESSAGES.pr_acepted;
-			} else {
-				embed.embeds[0].description = MENSAGE_ON_PUSH || DEFAULT_MESSAGES.push;
-				embed.embeds[0].footer.text = `O commit que disparou a mensagem: ${
-					context.payload.commits[context.payload.commits.length - 1].message
-				}`;
-			}
+			embed.embeds[0].description = MENSAGE_ON_PUSH || DEFAULT_MESSAGES.push;
+			embed.embeds[0].footer.text = `O commit que disparou a mensagem: ${
+				context.payload.commits[context.payload.commits.length - 1].message
+			}`;
+
 			break;
 		default:
 			console.error("Event not supported");
