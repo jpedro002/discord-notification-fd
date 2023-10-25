@@ -21,7 +21,6 @@ const sendDiscordMessage = async (DISCORD_WEBHOOK,DISCORD_PERSONALIZED_EMBED) =>
 	} else {
 		try {
 			const data = await fillDefaultEmbed();
-			console.log(DISCORD_WEBHOOK);
 			await postMessage(DISCORD_WEBHOOK, data);
 		} catch (error) {
 			console.error("Error:", error);
