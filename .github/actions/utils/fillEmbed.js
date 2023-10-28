@@ -1,6 +1,11 @@
 const { getAuthorAvatar } = require("./api.js");
 const { DEFAULT_EMBED, DEFAULT_MESSAGES } = require("./data-embeds.js");
 const github = require("@actions/github");
+const { Octokit } = require("@octokit/rest");
+
+const octokit = new Octokit({
+  auth: process.env.GITHUB_TOKEN,
+});
 
 const context = github.context;
 
@@ -13,6 +18,21 @@ const {
 	MENSAGE_ON_ISSUE_OPENED,
 	MENSAGE_ON_ISSUE_MENSAGE_CREATED,
 } = process.env;
+
+
+
+
+async function isPushFromMerge() {
+  const { data: commit } = await octokit.rest.repos.getCommit({
+    owner: process.env.GITHUB_REPOSITORY_OWNER,
+    repo: process.env.GITHUB_REPOSITORY_NAME,
+    ref: process.env.GITHUB_SHA,
+  });
+
+  return commit.parents.length > 1;
+}
+
+
 
 const fillDefaultEmbed = async () => {
 	const githubActor = GITHUB_ACTOR;
@@ -66,10 +86,18 @@ const fillDefaultEmbed = async () => {
 			break;
 
 		case "push":
-			embed.embeds[0].description = MENSAGE_ON_PUSH || DEFAULT_MESSAGES.push;
-			embed.embeds[0].footer.text = `O commit que disparou a mensagem: ${
-				context.payload.commits[context.payload.commits.length - 1].message
-			}`;
+			if (isPushFromMerge()) {
+				console.log("Push is a merge");
+				embed.embeds[0].description =
+					MENSAGE_ON_PULL_REQUEST_MERGED || DEFAULT_MESSAGES.pr_acepted;
+			} else {
+				console.log("Push is not a merge");
+				embed.embeds[0].description = MENSAGE_ON_PUSH || DEFAULT_MESSAGES.push;
+				embed.embeds[0].footer.text = `O commit que disparou a mensagem: ${
+					context.payload.commits[context.payload.commits.length - 1].message
+				}`;
+			}
+			
 
 			break;
 		case "issue_comment":
